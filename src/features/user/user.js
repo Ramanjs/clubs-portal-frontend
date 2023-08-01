@@ -138,11 +138,11 @@ export const userSlice = createSlice({
     },
     loadToken: (state, action) => {
       state.token = action.payload;
-      Cookies.set('instagram_token', action.payload);
+      Cookies.set('club_token', action.payload);
     },
     setHandle: (state, action) => {
       state.handle = action.payload;
-      Cookies.set('instagram_handle', action.payload);
+      Cookies.set('club_handle', action.payload);
     },
     setName: (state, action) => {
       state.name = action.payload
@@ -185,7 +185,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const {
-  loggedIn, loadToken, setHandle, setName, setBio, setPfp, setProfileLoaded, setPosts, setSuggested, setFollowers, setFollowing, logout } = userSlice.actions;
+export const { loggedIn, loadToken, setHandle, setName, setBio, setPfp, setProfileLoaded, setPosts, setSuggested, setFollowers, setFollowing, logout } = userSlice.actions;
 
 export default userSlice.reducer;

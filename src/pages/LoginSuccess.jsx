@@ -1,7 +1,7 @@
 import {useEffect} from "react"
 import { useSearchParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { loggedIn as loggedInAction, loadToken } from "../features/user/user"
+import { loggedIn as loggedInAction, loadToken, setHandle } from "../features/user/user"
 import { Navigate } from "react-router-dom"
 
 const LoginSuccess = () => {
@@ -11,9 +11,11 @@ const LoginSuccess = () => {
 
   useEffect(() => {
     const token = searchParams.get('accessToken')
+    const handle = searchParams.get('handle')
     console.log(token)
     dispatch(loggedInAction(true))
     dispatch(loadToken(token))
+    dispatch(setHandle(handle))
   }, [])
 
   if (loggedIn) {

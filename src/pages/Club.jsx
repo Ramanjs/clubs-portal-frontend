@@ -53,6 +53,13 @@ const Club = () => {
           </div>
           <div>
             <p className="font-medium text-lg underline">Upcoming Events</p>
+            {aboutInfo.events && aboutInfo.events.map(event => (
+              <div className="m-4 border-2 p-4 flex flex-col justify-between">
+                <p>Name: {event.name}</p>
+                <p>Start: {event.start}</p>
+                <p>End: {event.end}</p>
+              </div>
+            ))}
           </div>
         </div>
       )}

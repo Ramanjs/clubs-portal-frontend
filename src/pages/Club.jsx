@@ -3,13 +3,16 @@ import { useParams } from "react-router-dom"
 import { apiBaseUrl } from "../utils/baseUrl"
 import { useSelector } from "react-redux"
 import EventForm from "../components/EventForm"
+import { useNavigate } from "react-router-dom"
 
 const Club = () => {
   const [aboutInfo, setAboutInfo] = useState(null)
   const [form, setForm] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const { handle } = useParams() 
   const token = useSelector(state => state.user.token)
+  const navigate = useNavigate()
   
   useEffect(() => {
     fetch(apiBaseUrl + '/clubs/' + handle, {
@@ -26,6 +29,12 @@ const Club = () => {
         console.log(err)
       })
   }, [])
+
+  useEffect(() => {
+    if (success) {
+      return navigate("/", { replace: true })
+    }
+  }, [success])
 
   return (
     <div className="w-1/2 mx-auto flex flex-col items-center">
@@ -50,7 +59,7 @@ const Club = () => {
       {aboutInfo && aboutInfo.isCoordinator && !form && (
         <div className="p-2 font-bold text-white bg-blue-600 rounded-md cursor-pointer" onClick={() => setForm(!form)}>Propose a new event</div>
       )}
-      {form && <EventForm setForm={setForm} />}
+      {form && <EventForm setForm={setForm} clubHandle={handle} setSuccess={setSuccess}/>}
     </div>
   )
 }

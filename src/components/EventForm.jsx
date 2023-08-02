@@ -2,7 +2,7 @@ import {useState} from "react"
 import {useSelector} from "react-redux"
 import { apiBaseUrl } from "../utils/baseUrl"
 
-const EventForm = ({ clubHandle, setForm }) => {
+const EventForm = ({ clubHandle, setForm, setSuccess }) => {
   const token = useSelector(state => state.user.token)
 
   const [name, setName] = useState('')
@@ -29,7 +29,7 @@ const EventForm = ({ clubHandle, setForm }) => {
     })
       .then(res => res.json())
       .then(res => {
-
+        setSuccess(true)
       })
       .catch(err => {
         console.log(err)

@@ -20,7 +20,7 @@ const EventForm = ({ clubHandle, setForm, setSuccess }) => {
       },
       body: JSON.stringify({
         name,
-        desc,
+        description: desc,
         start,
         end,
         venue,

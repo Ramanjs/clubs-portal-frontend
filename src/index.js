@@ -45,6 +45,13 @@ root.render(
                 <Profile />
               </RequireAuth>
             } />
+          <Route
+            path='/'
+            element={
+              <RequireAuth>
+                <Navbar />
+              </RequireAuth>
+            } />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -32,7 +32,7 @@ const Club = () => {
 
   useEffect(() => {
     if (success) {
-      return navigate("/", { replace: true })
+      return navigate(`/users/${handle}`, { replace: true })
     }
   }, [success])
 

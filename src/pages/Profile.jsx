@@ -12,6 +12,7 @@ const Profile = () => {
     fetch(apiBaseUrl + '/users/' + handle)
       .then(res => res.json())
       .then(res => {
+        console.log(res)
         setAboutInfo(res)
       })
       .catch(err => {
@@ -26,9 +27,20 @@ const Profile = () => {
         <div className="mt-16">
           <h2 className="font-bold text-3xl">{aboutInfo.name}</h2>
           <p>Student</p>
-          <div className="mt-4">
-            <h3 className="underline text-lg">Events Registered</h3>
-          </div>
+        </div>
+      )}
+      <div className="mt-4">
+        <h3 className="underline text-lg">Events Registered</h3>
+      </div>
+      {aboutInfo && aboutInfo.requests && (
+        <div className="w-full mt-16">
+          <h3 className="underline text-lg">Proposed Events</h3>
+          {aboutInfo.requests.map(request => (
+            <div className="w-full border-2 p-2 flex justify-between">
+              <p>{request.name}</p>
+              <p>{request.status}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>

@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react"
+import {useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
 import { apiBaseUrl } from "../utils/baseUrl"
 
 const Profile = () => {
   const params = useParams()
+  const token = useSelector(state => state.user.token)
   const [aboutInfo, setAboutInfo] = useState(null)
 
   const { handle } = params
@@ -19,6 +21,38 @@ const Profile = () => {
         console.log(err)
       })
   }, [])
+
+  const handleApprove = (handle) => {
+    fetch(apiBaseUrl + '/events/requests/' + handle, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const handleReject = (handle) => {
+    fetch(apiBaseUrl + '/events/requests/' + handle, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   return (
     <div className="w-1/2 mx-auto mt-24 flex flex-col items-center">
@@ -50,8 +84,8 @@ const Profile = () => {
             <div className="w-full border-2 p-2 flex justify-between">
               <p>{request.name}</p>
               <div>
-                <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer">Approve</button>
-                <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer">Reject</button>
+                <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleApprove(request.handle)}>Approve</button>
+                <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleReject(request.handle)}>Reject</button>
               </div>
             </div>
           ))}

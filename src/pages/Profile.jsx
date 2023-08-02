@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
 import {useSelector} from "react-redux"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import { apiBaseUrl } from "../utils/baseUrl"
 
 const Profile = () => {
@@ -63,10 +63,18 @@ const Profile = () => {
           <p>Student</p>
         </div>
       )}
-      <div className="mt-4">
-        <h3 className="underline text-lg">Events Registered</h3>
-      </div>
-      {aboutInfo && aboutInfo.requests && (
+      {aboutInfo && aboutInfo.registrations && (
+        <div className="w-full mt-16">
+          <h3 className="underline text-lg">Events Registered</h3>
+          {aboutInfo.registrations.map(reg => (
+            <Link to={`/events/${reg.handle}`} className="p-4 border-2 flex flex-col">
+              <p>Name: {reg.name}</p>
+              <p>Venue: {reg.venue}</p>
+            </Link>
+          ))}
+        </div>
+      )}
+     {aboutInfo && aboutInfo.requests && (
         <div className="w-full mt-16">
           <h3 className="underline text-lg">Proposed Events</h3>
           {aboutInfo.requests.map(request => (

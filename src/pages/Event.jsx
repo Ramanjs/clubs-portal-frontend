@@ -2,12 +2,15 @@ import {useEffect, useState} from "react"
 import {useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
 import {apiBaseUrl} from "../utils/baseUrl"
+import { useNavigate } from "react-router-dom"
 
 const Event = () => {
   const params = useParams()
   const { handle } = params
   const token = useSelector(state => state.user.token)
   const [aboutInfo, setAboutInfo] = useState(null)
+  const navigate = useNavigate()
+  const userHandle = useSelector(state => state.user.handle)
 
   useEffect(() => {
     fetch(apiBaseUrl + '/events/' + handle, {
@@ -25,6 +28,22 @@ const Event = () => {
       })
   }, [])
 
+  const handleClick = () => {
+    fetch(apiBaseUrl + '/events/' + handle + '/registrations', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        navigate('/users/' + userHandle, { replace: true })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className="w-1/2 mx-auto mt-24">
       {aboutInfo && (
@@ -35,6 +54,7 @@ const Event = () => {
           <p>End: {aboutInfo.end}</p>
         </div>
       )}
+      <button className="border-2 p-4" onClick={handleClick}>Register</button>
     </div>
   )
 }

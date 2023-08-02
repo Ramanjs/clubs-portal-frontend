@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import RequireAuth from './components/RequireAuth'
+import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Clubs from './pages/Clubs'
 import Club from './pages/Club'
 import Profile from './pages/Profile'
+import Event from './pages/Event'
 import LoginSuccess from './pages/LoginSuccess'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
@@ -46,10 +48,19 @@ root.render(
               </RequireAuth>
             } />
           <Route
+            path='/events/:handle'
+            element={
+              <RequireAuth>
+                <Navbar />
+                <Event />
+              </RequireAuth>
+            } />
+          <Route
             path='/'
             element={
               <RequireAuth>
                 <Navbar />
+                <Home />
               </RequireAuth>
             } />
         </Routes>

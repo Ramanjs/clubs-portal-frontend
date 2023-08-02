@@ -4,6 +4,7 @@ import { apiBaseUrl } from "../utils/baseUrl"
 import { useSelector } from "react-redux"
 import EventForm from "../components/EventForm"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Club = () => {
   const [aboutInfo, setAboutInfo] = useState(null)
@@ -54,11 +55,11 @@ const Club = () => {
           <div>
             <p className="font-medium text-lg underline">Upcoming Events</p>
             {aboutInfo.events && aboutInfo.events.map(event => (
-              <div className="m-4 border-2 p-4 flex flex-col justify-between">
+              <Link to={`/events/${event.handle}`} className="m-4 border-2 p-4 flex flex-col justify-between">
                 <p>Name: {event.name}</p>
                 <p>Start: {event.start}</p>
                 <p>End: {event.end}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

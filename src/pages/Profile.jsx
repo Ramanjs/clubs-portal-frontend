@@ -43,6 +43,20 @@ const Profile = () => {
           ))}
         </div>
       )}
+      {aboutInfo && aboutInfo.pendingRequests && (
+        <div className="w-full mt-16">
+          <h3 className="underline text-lg">Pending Proposals</h3>
+          {aboutInfo.pendingRequests.map(request => (
+            <div className="w-full border-2 p-2 flex justify-between">
+              <p>{request.name}</p>
+              <div>
+                <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer">Approve</button>
+                <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer">Reject</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

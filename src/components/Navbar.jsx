@@ -10,7 +10,10 @@ const Navbar = () => {
   return (
     <div className="w-full fixed top-0 h-16 border-b-2 border-b-gray-200 p-2 flex justify-between items-center bg-white">
       <Link to="/" className="font-bold text-xl">ClubConnect IIITD</Link>
-      <Link to={`/users/${handle}`}>My Profile</Link>
+      <div className="flex space-x-4">
+        <Link to="/clubs">Clubs</Link>
+        <Link to={`/users/${handle}`}>My Profile</Link>
+      </div>
     </div>
   )
 }

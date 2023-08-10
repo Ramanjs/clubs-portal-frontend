@@ -17,15 +17,21 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="mt-24">
+    <div className="mt-20">
+    <h1 className="text-center mx-auto font-bold text-2xl pt-14">Upcoming Events</h1>
+    <div class="mx-auto max-w-xs relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
       <div className="w-1/2 mx-auto flex flex-col">
-        <h1>Upcoming Events</h1>
         {events.map(event => (
-          <Link to={`/events/${event.handle}`} className="m-4 p-4 border-2">
+          <div className="m-4 p-6 rounded-xl shadow-md hover:shadow-lg duration-200 focus:shadow-xs border-2">
+          <Link to={`/events/${event.handle}`}>
             <p>Name: {event.name}</p>
+            <p>Club: {event.club}</p>
             <p>Start: {event.start}</p>
             <p>End: {event.end}</p>
           </Link>
+          </div>
         ))}
       </div>
     </div>

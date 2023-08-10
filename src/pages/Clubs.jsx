@@ -18,15 +18,21 @@ const Clubs = () => {
   }, [])
 
   return (
-    <div className="w-1/2 mx-auto flex flex-col items-center">
-      <h1 className="font-bold text-4xl">Clubs at IIIT Delhi</h1>
+    <>
+    <h1 className="text-center mx-auto font-bold text-2xl mt-20 pt-14">Student Clubs at IIIT Delhi</h1>
+    <div class="mx-auto max-w-xs relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+    <div className="mt-10 mx-auto flex flex-col items-center">
       {clubs.map(club => (
-        <div className="border-2 p-4">
+        <div className="flex flex-col align-center m-4 p-6 rounded-xl shadow-md hover:shadow-lg duration-200 focus:shadow-xs border-2">
           <Link to={`/clubs/${club.handle}`}>{club.name}</Link>
           <p>{club.description}</p>
         </div>
       ))}
+
     </div>
+    </>
   )
 }
 

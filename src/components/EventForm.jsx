@@ -52,8 +52,10 @@ const EventForm = ({ clubHandle, setForm, setSuccess }) => {
       <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={end} onChange={(e) => setEnd(e.target.value)}placeholder="dd-mm-yy"/>
       <p className="mt-4">Venue</p>
       <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={venue} onChange={(e) => setVenue(e.target.value)}placeholder="C101... (or online)"/>
+      <p className="mt-4">Expected Participation</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={expParticipation} onChange={(e) => setExpParticipation(e.target.value)}placeholder="150"/>
       <p className="mt-4">Requirements</p>
-      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={venue} onChange={(e) => setVenue(e.target.value)}placeholder="FMS Cleaning..."/>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={req} onChange={(e) => setReq(e.target.value)}placeholder="FMS Cleaning..."/>
     </div>
 
     <div>

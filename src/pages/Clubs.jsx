@@ -26,7 +26,7 @@ const Clubs = () => {
     <div className="mt-10 mx-auto flex flex-col items-center">
       {clubs.map(club => (
         <div className="flex flex-col align-center m-4 p-6 rounded-xl shadow-md hover:shadow-lg duration-200 focus:shadow-xs border-2">
-          <Link to={`/clubs/${club.handle}`}>{club.name}</Link>
+          <Link to={`/clubs/${club.handle}`} className="font-bold">{club.name}</Link>
           <p>{club.description}</p>
         </div>
       ))}

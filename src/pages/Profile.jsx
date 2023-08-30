@@ -55,18 +55,22 @@ const Profile = () => {
   }
 
   return (
-    <div className="w-1/2 mx-auto mt-24 flex flex-col items-center">
-      <h1 className="font-bold text-4xl">My Profile</h1>
+    <>
+    <h1 className="text-center mx-auto font-bold text-2xl mt-20 pt-14">My Profile</h1>
+    <div class="mx-auto max-w-xs relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+    <div className="w-1/2 mx-auto mt-2 flex flex-col items-center">
       {aboutInfo && (
-        <div className="mt-16">
+        <div className="mt-2 text-center">
           <h2 className="font-bold text-3xl">{aboutInfo.name}</h2>
-          <p>Student</p>
+          <p className="text-slate-500">Student</p>
         </div>
       )}
       {aboutInfo && aboutInfo.registrations && (
         <div className="w-full mt-16">
           <h3 className="underline text-lg">Events Registered</h3>
-          {aboutInfo.registrations.map(reg => (
+          {aboutInfo.registrations.length === 0 ? "You have not registered for any events." : aboutInfo.registrations.map(reg => (
             <Link to={`/events/${reg.handle}`} className="p-4 border-2 flex flex-col">
               <p>Name: {reg.name}</p>
               <p>Venue: {reg.venue}</p>
@@ -77,7 +81,7 @@ const Profile = () => {
      {aboutInfo && aboutInfo.requests && (
         <div className="w-full mt-16">
           <h3 className="underline text-lg">Proposed Events</h3>
-          {aboutInfo.requests.map(request => (
+          {aboutInfo.requests.length === 0 ? "You have not proposed any events." : aboutInfo.requests.map(request => (
             <div className="w-full border-2 p-2 flex justify-between">
               <p>{request.name}</p>
               <p>{request.status}</p>
@@ -100,6 +104,7 @@ const Profile = () => {
         </div>
       )}
     </div>
+    </>
   )
 }
 

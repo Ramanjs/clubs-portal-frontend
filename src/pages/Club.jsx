@@ -38,11 +38,14 @@ const Club = () => {
   }, [success])
 
   return (
+    <>
+    <h1 className="text-center mx-auto font-bold text-2xl pt-14">Club Profile {aboutInfo ? ": " + aboutInfo.name : ""}</h1>
+    <div class="mx-auto max-w-xs relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
     <div className="w-1/2 mx-auto flex flex-col items-center">
-      <h1 className="font-bold text-4xl underline">Club Profile</h1>
       {aboutInfo && (
         <div className="m-4">
-          <h2 className="font-semibold text-xl">{aboutInfo.name}</h2>
           <div>
             <p className="font-medium text-lg underline">Club Description</p>
             <p>{aboutInfo.description}</p>
@@ -54,7 +57,7 @@ const Club = () => {
           </div>
           <div>
             <p className="font-medium text-lg underline">Upcoming Events</p>
-            {aboutInfo.events && aboutInfo.events.map(event => (
+            {aboutInfo.events && aboutInfo.events.length === 0 ? "No upcoming events." : aboutInfo.events.map(event => (
               <Link to={`/events/${event.handle}`} className="m-4 border-2 p-4 flex flex-col justify-between">
                 <p>Name: {event.name}</p>
                 <p>Start: {event.start}</p>
@@ -69,6 +72,7 @@ const Club = () => {
       )}
       {form && <EventForm setForm={setForm} clubHandle={handle} setSuccess={setSuccess}/>}
     </div>
+    </>
   )
 }
 

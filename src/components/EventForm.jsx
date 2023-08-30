@@ -10,6 +10,8 @@ const EventForm = ({ clubHandle, setForm, setSuccess }) => {
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
   const [venue, setVenue] = useState('')
+  const [expParticipation, setExpParticipation] = useState('')
+  const [req, setReq] = useState('')
 
   const handleSubmit = () => {
     fetch(apiBaseUrl + '/events/requests', {
@@ -37,20 +39,28 @@ const EventForm = ({ clubHandle, setForm, setSuccess }) => {
   }
 
   return (
+    <>
     <div className="m-8 w-full flex flex-col">
-      <p>Event Name</p>
-      <input type="text" className="border-2" value={name} onChange={(e) => setName(e.target.value)}/>
-      <p>Event Description</p>
-      <input type="text" className="border-2" value={desc} onChange={(e) => setDesc(e.target.value)}/>
-      <p>Start Date</p>
-      <input type="text" className="border-2" value={start} onChange={(e) => setStart(e.target.value)}placeholder="dd-mm-yy"/>
-      <p>End Date</p>
-      <input type="text" className="border-2" value={end} onChange={(e) => setEnd(e.target.value)}placeholder="dd-mm-yy"/>
-      <p>Venue</p>
-      <input type="text" className="border-2" value={venue} onChange={(e) => setVenue(e.target.value)}placeholder="C101..."/>
-      <button className="font-bold text-white bg-red-600 px-2" onClick={() => setForm(false)}>Cancel</button>
-      <button className="font-bold text-white bg-green-600 px-2" onClick={handleSubmit}>Submit</button>
+      
+      <p className="mt-4">Event Name</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={name} onChange={(e) => setName(e.target.value)}/>
+      <p className="mt-4">Event Description</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={desc} onChange={(e) => setDesc(e.target.value)}/>
+      <p className="mt-4">Start Date</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={start} onChange={(e) => setStart(e.target.value)}placeholder="dd-mm-yy"/>
+      <p className="mt-4">End Date</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={end} onChange={(e) => setEnd(e.target.value)}placeholder="dd-mm-yy"/>
+      <p className="mt-4">Venue</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={venue} onChange={(e) => setVenue(e.target.value)}placeholder="C101... (or online)"/>
+      <p className="mt-4">Requirements</p>
+      <input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={venue} onChange={(e) => setVenue(e.target.value)}placeholder="FMS Cleaning..."/>
     </div>
+
+    <div>
+      <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mx-2 mb-10 rounded focus:outline-none focus:shadow-outline" onClick={() => setForm(false)}>Cancel</button>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 mb-10 rounded focus:outline-none focus:shadow-outline" onClick={handleSubmit}>Submit</button>
+    </div>
+    </>
   )
 }
 

@@ -23,7 +23,7 @@ const Home = () => {
         <div class="flex-grow border-t border-gray-300"></div>
     </div>
       <div className="w-1/2 mx-auto flex flex-col">
-        {events.map(event => (
+        {events.length === 0 ? <div className="flex flex-col justify-center items-center"><p>No events coming up...</p><img src="https://st4.depositphotos.com/5365202/37818/v/450/depositphotos_378186364-stock-illustration-hand-drawn-vector-cartoon-illustration.jpg"/></div> : events.map(event => (
           <div className="m-4 p-6 rounded-xl shadow-md hover:shadow-lg duration-200 focus:shadow-xs border-2">
           <Link to={`/events/${event.handle}`}>
             <p>Name: {event.name}</p>

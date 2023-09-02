@@ -7,13 +7,6 @@ const initialState = {
   profileLoaded: false,
   token: Cookies.get('club_token'),
   handle: Cookies.get('club_handle'),
-  name: '',
-  bio: '',
-  posts: [],
-  followers: [],
-  following: [],
-  feed: [],
-  suggested: []
 };
 
 if (initialState.token && initialState.handle) {
@@ -51,84 +44,6 @@ export const login = createAsyncThunk('user', async (data, thunkAPI) => {
     })
 });
 
-export const fetchUserDetails = createAsyncThunk('user', async (creds, thunkAPI) => {
-  fetch(apiBaseUrl + '/users/' + creds.handle, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + creds.token
-    },
-  })
-    .then(async res=> {
-      if (!res.ok) {
-        res = await res.json()
-        throw new Error(res.message);
-      }
-      return res.json();
-    })
-    .then(res=> {
-      thunkAPI.dispatch(setName(res.data.name));
-      thunkAPI.dispatch(setBio(res.data.bio));
-      thunkAPI.dispatch(setPfp(res.data.pfp));
-      thunkAPI.dispatch(setFollowers(res.data.followers))
-      thunkAPI.dispatch(setFollowing(res.data.following))
-      thunkAPI.dispatch(setProfileLoaded(true));
-    })
-    .catch(err => {
-      if (err.message === 'jwt expired') {
-        thunkAPI.dispatch(logout())
-      }
-    })
-})
-
-export const fetchUserPosts = createAsyncThunk('user', async (creds, thunkAPI) => {
-  fetch(apiBaseUrl + '/users/' + creds.handle + '/posts', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${creds.token}`
-    }
-  })
-    .then(async res=> {
-      if (!res.ok) {
-        res = await res.json()
-        throw new Error(res.message);
-      }
-      return res.json();
-    })
-    .then(res=> {
-      thunkAPI.dispatch(setPosts(res.message));
-    })
-    .catch(err => {
-      if (err.message === 'jwt expired') {
-        thunkAPI.dispatch(logout())
-      }
-    })
-})
-
-export const fetchSuggested = createAsyncThunk('user', async (creds, thunkAPI) => {
-  fetch(apiBaseUrl + '/users/' + creds.handle + '/suggested', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${creds.token}`
-    }
-  })
-    .then(async res=> {
-      if (!res.ok) {
-        res = await res.json()
-        throw new Error(res.message);
-      }
-      return res.json();
-    })
-    .then(res=> {
-      thunkAPI.dispatch(setSuggested(res.message));
-    })
-    .catch(err => {
-      if (err.message === 'jwt expired') {
-        thunkAPI.dispatch(logout())
-      }
-    })
-})
-
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -144,47 +59,14 @@ export const userSlice = createSlice({
       state.handle = action.payload;
       Cookies.set('club_handle', action.payload);
     },
-    setName: (state, action) => {
-      state.name = action.payload
-    },
-    setBio: (state, action) => {
-      state.bio = action.payload
-    },
-    setPfp: (state, action) => {
-      state.pfp = action.payload
-    },
-    setProfileLoaded: (state, action) => {
-      state.profileLoaded = action.payload
-    },
-    setPosts: (state, action) => {
-      state.posts = action.payload
-    },
-    setSuggested: (state, action) => {
-      state.suggested = action.payload
-    },
-    setFollowers: (state, action) => {
-      state.followers = action.payload
-    },
-    setFollowing: (state, action) => {
-      state.following = action.payload
-    },
     logout: (state) => {
       state.loggedIn= false
-      state.profileLoaded= false
       state.token = undefined
       state.handle = undefined
-      state.name= ''
-      state.bio= ''
-      state.pfp= ''
-      state.posts= []
-      state.followers= []
-      state.following= []
-      state.feed= []
-      state.suggested= []
     }
   },
 })
 
-export const { loggedIn, loadToken, setHandle, setName, setBio, setPfp, setProfileLoaded, setPosts, setSuggested, setFollowers, setFollowing, logout } = userSlice.actions;
+export const { loggedIn, loadToken, setHandle, logout } = userSlice.actions;
 
 export default userSlice.reducer;

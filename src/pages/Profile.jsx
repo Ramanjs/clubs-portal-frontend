@@ -7,6 +7,7 @@ const Profile = () => {
   const params = useParams()
   const token = useSelector(state => state.user.token)
   const [aboutInfo, setAboutInfo] = useState(null)
+  const [badgeInfo, setBadgeInfo] = useState()
 
   const { handle } = params
 
@@ -16,6 +17,12 @@ const Profile = () => {
       .then(res => {
         console.log(res)
         setAboutInfo(res)
+        let badge = []
+        if (res.isClubsCoordinator)
+          badge.push('Student Council Clubs Coordinator')
+        if (res.isCoordinator)
+          badge.push('Club Coordinator')
+        setBadgeInfo(badge.join(", "))
       })
       .catch(err => {
         console.log(err)
@@ -57,14 +64,14 @@ const Profile = () => {
   return (
     <>
     <h1 className="text-center mx-auto font-bold text-2xl mt-20 pt-14">My Profile</h1>
-    <div class="mx-auto max-w-xs relative flex py-5 items-center">
-        <div class="flex-grow border-t border-gray-300"></div>
+    <div className="mx-auto max-w-xs relative flex py-5 items-center">
+        <div className="flex-grow border-t border-gray-300"></div>
     </div>
     <div className="w-1/2 mx-auto mt-2 flex flex-col items-center">
       {aboutInfo && (
         <div className="mt-2 text-center">
           <h2 className="font-bold text-3xl">{aboutInfo.name}</h2>
-          <p className="text-slate-500">Student</p>
+          <p className="text-slate-500">{badgeInfo}</p>
         </div>
       )}
       {aboutInfo && aboutInfo.registrations && (

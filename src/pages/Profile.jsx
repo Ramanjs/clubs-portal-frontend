@@ -70,13 +70,13 @@ const Profile = () => {
     <div className="w-1/2 mx-auto mt-2 flex flex-col items-center">
       {aboutInfo && (
         <div className="mt-2 text-center">
-          <h2 className="font-bold text-3xl">{aboutInfo.name}</h2>
-          <p className="text-slate-500">{badgeInfo}</p>
+          <h2 className="font-bold text-3xl mb-3">{aboutInfo.name}</h2>
+          <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">{badgeInfo}</span>
         </div>
       )}
       {aboutInfo && aboutInfo.registrations && (
         <div className="w-full mt-16">
-          <h3 className="underline text-lg">Events Registered</h3>
+          <h3 className="font-bold text-lg">Events Registered</h3>
           {aboutInfo.registrations.length === 0 ? "You have not registered for any events." : aboutInfo.registrations.map(reg => (
             <Link to={`/events/${reg.handle}`} className="p-4 border-2 flex flex-col">
               <p>Name: {reg.name}</p>
@@ -87,7 +87,7 @@ const Profile = () => {
       )}
      {aboutInfo && aboutInfo.requests && (
         <div className="w-full mt-16">
-          <h3 className="underline text-lg">Proposed Events</h3>
+          <h3 className="font-bold text-lg">Proposed Events</h3>
           {aboutInfo.requests.length === 0 ? "You have not proposed any events." : aboutInfo.requests.map(request => (
             <div className="w-full border-2 p-2 flex justify-between">
               <p>{request.name}</p>

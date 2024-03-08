@@ -13,6 +13,7 @@ const Club = () => {
 
   const { handle } = useParams() 
   const token = useSelector(state => state.user.token)
+  const userHandle = useSelector(state => state.user.handle)
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -33,7 +34,7 @@ const Club = () => {
 
   useEffect(() => {
     if (success) {
-      return navigate(`/users/${handle}`, { replace: true })
+      return navigate(`/users/${userHandle}`, { replace: true })
     }
   }, [success])
 

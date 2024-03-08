@@ -98,10 +98,18 @@ const Profile = () => {
       )}
       {aboutInfo && aboutInfo.pendingRequests && (
         <div className="w-full mt-16">
-          <h3 className="underline text-lg">Pending Proposals</h3>
+          <h3 className="underline text-lg">Pending Event Proposals</h3>
           {aboutInfo.pendingRequests.map(request => (
             <div className="w-full border-2 p-2 flex justify-between">
-              <p>{request.name}</p>
+              <div className="flex flex-col">
+                <p>Name: {request.name}</p>
+                <p>Description: {request.description}</p>
+                <p>Start: {request.start}</p>
+                <p>End: {request.end}</p>
+                <p>Club: {request.club.name}</p>
+                <p>Coordinator: {request.coordinator.name}</p>
+                <p>Venue: {request.venue}</p>
+              </div>
               <div>
                 <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleApprove(request.handle)}>Approve</button>
                 <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleReject(request.handle)}>Reject</button>

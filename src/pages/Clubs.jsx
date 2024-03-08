@@ -32,8 +32,10 @@ const Clubs = () => {
 
   return (
     <>
-    <h1 className="text-center mx-auto font-bold text-2xl mt-20 pt-14">Student Clubs at IIIT Delhi</h1>
-    <button className="p-2 font-bold text-white bg-blue-600 rounded-md cursor-pointer mx-auto" onClick={() => setForm(!form)}>Propose a new club</button>
+      <div className="w-full flex justify-center my-4 space-x-4">
+        <h1 className="font-bold text-2xl">Student Clubs at IIIT Delhi</h1>
+        <button className="p-2 font-bold text-white bg-blue-600 rounded-md cursor-pointer" onClick={() => setForm(!form)}>Propose a new club</button>
+      </div>
     <div className="w-full">
       {form && <ClubForm setForm={setForm} clubHandle={handle} setSuccess={setSuccess}/>}
     </div>

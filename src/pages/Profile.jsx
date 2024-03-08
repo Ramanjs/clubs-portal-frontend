@@ -61,6 +61,38 @@ const Profile = () => {
       })
   }
 
+  const handleClubApprove = (handle) => {
+    fetch(apiBaseUrl + '/clubs/requests/' + handle, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const handleClubReject = (handle) => {
+    fetch(apiBaseUrl + '/clubs/requests/' + handle, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <>
     <h1 className="text-center mx-auto font-bold text-2xl mt-20 pt-14">My Profile</h1>
@@ -96,6 +128,17 @@ const Profile = () => {
           ))}
         </div>
       )}
+     {aboutInfo && aboutInfo.clubRequests && (
+        <div className="w-full mt-16">
+          <h3 className="font-bold text-lg">Proposed Clubs</h3>
+          {aboutInfo.clubRequests.length === 0 ? "You have not proposed any clubs." : aboutInfo.clubRequests.map(request => (
+            <div className="w-full border-2 p-2 flex justify-between">
+              <p>{request.name}</p>
+              <p>{request.status}</p>
+            </div>
+          ))}
+        </div>
+      )}
       {aboutInfo && aboutInfo.pendingRequests && (
         <div className="w-full mt-16">
           <h3 className="underline text-lg">Pending Event Proposals</h3>
@@ -113,6 +156,26 @@ const Profile = () => {
               <div>
                 <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleApprove(request.handle)}>Approve</button>
                 <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleReject(request.handle)}>Reject</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {aboutInfo && aboutInfo.pendingClubRequests && (
+        <div className="w-full mt-16">
+          <h3 className="underline text-lg">Pending Club Proposals</h3>
+          {aboutInfo.pendingClubRequests.map(request => (
+            <div className="w-full border-2 p-2 flex justify-between">
+              <div className="flex flex-col">
+                <p>Name: {request.name}</p>
+                <p>Description: {request.description}</p>
+                <p>Coordinator: {request.coordinator.name}</p>
+                <p>Handle: {request.handle}</p>
+                <p>Email: {request.email}</p>
+              </div>
+              <div>
+                <button className="text-white bg-green-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleClubApprove(request.handle)}>Approve</button>
+                <button className="text-white bg-red-600 font-bold p-2 mx-2 cursor-pointer" onClick={() => handleClubReject(request.handle)}>Reject</button>
               </div>
             </div>
           ))}
